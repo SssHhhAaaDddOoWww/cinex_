@@ -2,27 +2,17 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 
-	db "github.com/SssHhhAaaDddOoWww/Goiler/internal/database"
-	"github.com/SssHhhAaaDddOoWww/Goiler/internal/routes"
-	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
+	tea "github.com/charmbracelet/bubbletea"
 )
 
 func main() {
-	err := godotenv.Load()
+	p := tea.NewProgram(InitialModel())
+	_, err := p.Run()
 	if err != nil {
-		fmt.Println(err)
-	}
-	db.Connect()
-	router := gin.Default()
-	routes.Routes(router)
+		fmt.Println("Error occured while starting !!!")
+		os.Exit(1)
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "4000"
 	}
-	log.Fatal(router.Run(":" + port))
 }
