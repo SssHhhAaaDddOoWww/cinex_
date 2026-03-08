@@ -1,10 +1,10 @@
 package types
 
 type Show struct {
-	ID    int    `json:"id"`
-	Title string `json:"title"`
-	Type  string `json:"media_type"`
-	Year  string `json:"release_date"`
+	ID   int    `json:"id"`
+	Name string `json:"title"`
+	Type string `json:"media_type"`
+	Year string `json:"release_date"`
 }
 type Episode struct {
 	ID     int    `json:"id"`
@@ -14,4 +14,17 @@ type Episode struct {
 type Season struct {
 	Name   string `json:"name"`
 	Number int    `json:"season_number"`
+}
+
+type Torrent struct {
+	Title   string
+	Magnet  string
+	Seeders int
+	Size    string
+	Quality string
+}
+
+type Provider interface {
+	Name() string
+	Search(query string) ([]Torrent, error)
 }
